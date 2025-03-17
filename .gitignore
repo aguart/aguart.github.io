@@ -1,3 +1,5 @@
 .DS_Store
-server/
-serv
+
+# IDE's
+.idea/
+.vscode/
