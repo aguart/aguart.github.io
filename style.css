@@ -2,19 +2,33 @@
 
 :root {
     --background: #2A2220;
+    --monitor-bg: #121212;
     --syn: #AA455F;
     --name: #f9e45b;
     --value: #189ab4;
     --prompt: #639E78;
+    --link: #E56739;
+    --link-hover-bg: #e24486;
+    --text: #FFFFFF;
+    --monitor-border: #333333;
+    --monitor-bezel: #1a1a1a;
 }
 
 a {
-    color: #E56739; /* Цвет обычной ссылки */ 
+    color: var(--link);
+    text-decoration: none;
 }
 
 a:hover {
-    color: #FFFFFF; /* Цвет ссылки при наведении на нее курсора мыши */  
-    background: #e24486;
+    color: var(--text);
+    background: var(--link-hover-bg);
+}
+
+a h1 {
+    display: inline;
+    font-size: 1em;
+    margin: 0;
+    color: inherit; /* Чтобы заголовок наследовал цвет ссылки */
 }
 
 ::-moz-selection { 
@@ -29,7 +43,13 @@ a:hover {
 
 html,body {
     font-family: 'Fira Code', monospace;
-    background: var(--background);
+    background-color: var(--background);
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+    background-attachment: fixed;
     color: white;
     font-size: 1.0em;
     font-weight: 400;
@@ -38,11 +58,87 @@ html,body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.monitor-frame {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: var(--monitor-bezel);
+    padding: 20px;
+    border-radius: 20px;
+    border: 4px solid var(--monitor-border);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.monitor-screen-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 2px solid #000;
+}
+
+.monitor-screen {
+    background: var(--monitor-bg);
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Блик на экране монитора */
+.monitor-screen-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.1) 0%, transparent 75%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Кастомный скроллбар для монитора */
+.monitor-screen::-webkit-scrollbar {
+    width: 8px;
+}
+
+.monitor-screen::-webkit-scrollbar-track {
+    background: var(--monitor-bg);
+}
+
+.monitor-screen::-webkit-scrollbar-thumb {
+    background: var(--monitor-border);
+    border-radius: 4px;
+}
+
+.monitor-screen::-webkit-scrollbar-thumb:hover {
+    background: var(--prompt);
+}
+
+.monitor-stand {
+    width: 150px;
+    height: 15px;
+    background: var(--monitor-border);
+    margin: 0 auto;
+    position: relative;
+}
+
+.monitor-stand::after {
+    content: "";
+    display: block;
+    width: 250px;
+    height: 8px;
+    background: var(--monitor-border);
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px 5px 0 0;
+}
+
 .container {
-    width: 90vw;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 50px 0;
+    padding: 30px;
 }
 
 .prompt {
@@ -54,10 +150,6 @@ html,body {
 
 .prompt-text {
     color: var(--prompt);
-}
-
-.syn {
-    color: var(--syn);
 }
 
 .name {
@@ -76,18 +168,16 @@ li {
     margin: 0px 0;
 }
 
-a {
-    text-decoration: none;
+pre {
+    margin: 1em 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 1.2em;
 }
 
-a:hover:after {
-/*    content: "<-";*/
-}
-
-form {
-    display: inline-block;
-    width: 100%;
-    box-sizing: border-box;
+code {
+    font-family: inherit;
+    font-size: inherit;
 }
 
 @media screen and (max-width: 1500px) {
@@ -95,7 +185,43 @@ form {
         font-size: 1em;
     }
 
+    .monitor-frame {
+        margin: 20px;
+    }
+
     .container {
         padding: 25px 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .monitor-frame {
+        margin: 0;
+        padding: 10px;
+        border-radius: 0;
+        border: none;
+    }
+
+    .monitor-screen {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .monitor-stand {
+        display: none;
+    }
+
+    .container {
+        padding: 20px 15px;
+        width: 100%;
+    }
+    
+    .prompt {
+        padding: 0px 5px;
+        margin-right: 5px;
+    }
+
+    body {
+        font-size: 0.9em;
     }
 }
