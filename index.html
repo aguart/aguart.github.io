@@ -6,14 +6,27 @@
     <meta name="description" content="Alexey Gridnev - Backend Software Engineer. Experience in Golang, Network Engineering, and Cybersecurity.">
     <meta name="keywords" content="Golang, Backend Engineer, Alexey Gridnev, Resume, Software Developing, Cybersecurity">
     <title>Alexey Gridnev | Backend Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="canonical" href="https://aguart.github.io/">
     <link rel="shortcut icon" href="/images/animal-2.png"/>
 </head>
 
 <body>
     <!-- Theme/Color selection state -->
-    <input type="checkbox" id="bg-settings-toggle" hidden>
+    <input type="radio" name="window-toggle" id="terminal-toggle" checked hidden>
+    <input type="radio" name="window-toggle" id="browser-toggle" hidden>
+    <input type="radio" name="window-toggle" id="files-toggle" hidden>
+    <input type="radio" name="window-toggle" id="settings-toggle" hidden>
+    
+    <!-- Settings Section Toggles -->
+    <input type="radio" name="settings-section" id="section-appearance" checked hidden>
+    <input type="radio" name="settings-section" id="section-profile" hidden>
+    <input type="radio" name="settings-section" id="section-system" hidden>
     
     <!-- Start Colors -->
     <input type="radio" name="start-color" id="start-blue" checked hidden>
@@ -41,54 +54,94 @@
                 <span class="app-menu">Terminal</span>
             </div>
             <div class="right-section">
-                <div class="theme-switcher">
-                    <label for="bg-settings-toggle" class="theme-btn" style="display: inline;">🎨</label>
-                </div>
                 <span id="clock" class="clock"></span>
                 <span class="user-name">aguart</span>
             </div>
         </header>
 
         <main class="workspace">
-            <!-- Color Settings Modal -->
-            <div class="settings-modal">
+            <!-- Settings Window -->
+            <div class="settings-window" id="settings-window">
                 <div class="settings-header">
-                    <span>Background Settings</span>
-                    <label for="bg-settings-toggle" class="close-settings">×</label>
+                    <div class="settings-title">Settings</div>
+                    <div class="settings-controls">
+                        <label for="terminal-toggle" class="control close" title="Close"></label>
+                    </div>
                 </div>
-                <div class="settings-body">
-                    <p>Start Color:</p>
-                    <div class="color-grid">
-                        <label for="start-blue" class="swatch" style="background: #3a7bd5;"></label>
-                        <label for="start-purple" class="swatch" style="background: #8e44ad;"></label>
-                        <label for="start-green" class="swatch" style="background: #27ae60;"></label>
-                        <label for="start-red" class="swatch" style="background: #e74c3c;"></label>
-                        <label for="start-dark" class="swatch" style="background: #2c3e50;"></label>
-                        <label for="start-teal" class="swatch" style="background: #1abc9c;"></label>
-                        <label for="start-pink" class="swatch" style="background: #ff758c;"></label>
-                        <label for="start-gold" class="swatch" style="background: #f1c40f;"></label>
-                    </div>
-                    <p>End Color:</p>
-                    <div class="color-grid">
-                        <label for="end-darkblue" class="swatch" style="background: #001f3f;"></label>
-                        <label for="end-deep-purple" class="swatch" style="background: #2c003e;"></label>
-                        <label for="end-dark-green" class="swatch" style="background: #0a2e1a;"></label>
-                        <label for="end-black" class="swatch" style="background: #000000;"></label>
-                        <label for="end-orange" class="swatch" style="background: #d35400;"></label>
-                        <label for="end-cyan" class="swatch" style="background: #2c3e50;"></label>
-                        <label for="end-rose" class="swatch" style="background: #ff7eb3;"></label>
-                        <label for="end-brown" class="swatch" style="background: #3e2723;"></label>
-                    </div>
+                <div class="settings-content">
+                    <aside class="settings-sidebar">
+                        <label for="section-appearance" class="sidebar-item" id="sidebar-appearance">
+                            <i class="fas fa-palette"></i> Appearance
+                        </label>
+                        <label for="section-profile" class="sidebar-item" id="sidebar-profile">
+                            <i class="fas fa-user"></i> Profile
+                        </label>
+                        <label for="section-system" class="sidebar-item" id="sidebar-system">
+                            <i class="fas fa-cog"></i> System
+                        </label>
+                    </aside>
+                    <section class="settings-main appearance-section">
+                        <h3>Appearance</h3>
+                        <div class="settings-section">
+                            <h4>Desktop Background</h4>
+                            <p>Start Color:</p>
+                            <div class="color-grid">
+                            <label for="start-blue" class="swatch" style="background: #3a7bd5;" title="Blue"></label>
+                            <label for="start-purple" class="swatch" style="background: #8e44ad;" title="Purple"></label>
+                            <label for="start-green" class="swatch" style="background: #27ae60;" title="Green"></label>
+                            <label for="start-red" class="swatch" style="background: #e74c3c;" title="Red"></label>
+                            <label for="start-dark" class="swatch" style="background: #2c3e50;" title="Dark"></label>
+                            <label for="start-teal" class="swatch" style="background: #1abc9c;" title="Teal"></label>
+                            <label for="start-pink" class="swatch" style="background: #ff758c;" title="Pink"></label>
+                            <label for="start-gold" class="swatch" style="background: #f1c40f;" title="Gold"></label>
+                        </div>
+                        <p>End Color:</p>
+                        <div class="color-grid">
+                            <label for="end-darkblue" class="swatch" style="background: #001f3f;" title="Dark Blue"></label>
+                            <label for="end-deep-purple" class="swatch" style="background: #2c003e;" title="Deep Purple"></label>
+                            <label for="end-dark-green" class="swatch" style="background: #0a2e1a;" title="Dark Green"></label>
+                            <label for="end-black" class="swatch" style="background: #000000;" title="Black"></label>
+                            <label for="end-orange" class="swatch" style="background: #d35400;" title="Orange"></label>
+                            <label for="end-cyan" class="swatch" style="background: #2c3e50;" title="Cyan"></label>
+                            <label for="end-rose" class="swatch" style="background: #ff7eb3;" title="Rose"></label>
+                            <label for="end-brown" class="swatch" style="background: #3e2723;" title="Brown"></label>
+                        </div>
+                        </div>
+                    </section>
+                    <section class="settings-main profile-section">
+                        <h3>Profile</h3>
+                        <div class="settings-section">
+                            <div class="profile-info">
+                                <div class="profile-field">
+                                    <label>Name</label>
+                                    <span>Alexey Gridnev</span>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Email</label>
+                                    <span>alexey.gridnev@gmail.com</span>
+                                </div>
+                                <div class="profile-field">
+                                    <label>About me</label>
+                                    <p>👋 I am a backend software engineer. I build high-performance backend systems, leveraging AI-driven workflows to accelerate delivery and optimize resource efficiency. My focus is on engineering scalable services that drive cost savings and technical excellence.</p>
+                                    <p style="margin-top: 10px;">I live on a sunny island Cyprus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="settings-main system-section">
+                        <h3>System</h3>
+                        <p>System settings coming soon...</p>
+                    </section>
                 </div>
             </div>
-            <div class="terminal-window">
+            <div class="terminal-window" id="terminal-window">
                 <div class="terminal-header">
                     <div class="terminal-title">Terminal - aguart@localhost: ~</div>
-                    <div class="terminal-controls">
-                        <span class="control minimize"></span>
-                        <span class="control maximize"></span>
-                        <span class="control close"></span>
-                    </div>
+                <div class="terminal-controls">
+                    <label for="terminal-toggle" class="control close" title="Close"></label>
+                    <label for="terminal-toggle" class="control minimize" title="Minimize"></label>
+                    <label for="terminal-toggle" class="control maximize" title="Maximize"></label>
+                </div>
                 </div>
                 <div class="terminal-content">
                     <div class="container">
@@ -251,40 +304,130 @@
                     </div>
                 </div>
             </div>
+
+            <div class="browser-window" id="browser-window">
+                <div class="browser-header">
+                    <div class="browser-address-bar">
+                        <label for="terminal-toggle" class="browser-dot" style="background: #ff5f56; cursor: pointer;" title="Close"></label>
+                        <span class="browser-dot" style="background: #ffbd2e;"></span>
+                        <span class="browser-dot" style="background: #27c93f;"></span>
+                        <div class="address-input">https://aguart.github.io/links</div>
+                    </div>
+                </div>
+                <div class="browser-content">
+                    <div class="links-container">
+                        <h2>My Resources</h2>
+                        <ul class="resource-links">
+                            <li>
+                                <a href="https://www.linkedin.com/in/aguart/" target="_blank" class="resource-item">
+                                    <i class="fab fa-linkedin icon" style="color: #0077b5;"></i> LinkedIn
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/aguart" target="_blank" class="resource-item">
+                                    <i class="fab fa-github icon" style="color: #333;"></i> GitHub
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://t.me/aguart" target="_blank" class="resource-item">
+                                    <i class="fab fa-telegram icon" style="color: #229ED9;"></i> Telegram
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Files Window -->
+            <div class="files-window" id="files-window">
+                <div class="files-header">
+                    <div class="files-title">File Manager</div>
+                    <div class="files-controls">
+                        <label for="terminal-toggle" class="control close" title="Close"></label>
+                    </div>
+                </div>
+                <div class="files-content">
+                    <aside class="files-sidebar">
+                        <div class="sidebar-group">
+                            <div class="group-title">Favorites</div>
+                            <div class="sidebar-item active"><i class="fas fa-home"></i> Home</div>
+                            <div class="sidebar-item"><i class="fas fa-file-alt"></i> Documents</div>
+                            <div class="sidebar-item"><i class="fas fa-image"></i> Images</div>
+                        </div>
+                    </aside>
+                    <div class="files-main">
+                        <div class="file-grid">
+                            <div class="file-item">
+                                <i class="fas fa-file-pdf file-icon" style="color: #ff5f56;"></i>
+                                <span class="file-name">CV_Alexey_Gridnev.pdf</span>
+                            </div>
+                            <div class="file-item">
+                                <i class="fas fa-file-code file-icon" style="color: #27ae60;"></i>
+                                <span class="file-name">main.go</span>
+                            </div>
+                            <div class="file-item">
+                                <i class="fas fa-image file-icon" style="color: #3a7bd5;"></i>
+                                <span class="file-name">profile_photo.jpg</span>
+                            </div>
+                            <div class="file-item">
+                                <i class="fas fa-file-alt file-icon" style="color: #888;"></i>
+                                <span class="file-name">notes.txt</span>
+                            </div>
+                            <div class="file-item">
+                                <i class="fas fa-folder file-icon" style="color: #f1c40f;"></i>
+                                <span class="file-name">projects</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer class="dock-container">
             <div class="dock">
-                <a href="index.html" class="dock-item" title="Terminal">
+                <label for="terminal-toggle" class="dock-item" title="Terminal">
                     <img src="images/icons/terminal.svg" class="dock-icon" alt="Terminal" width="42" height="42">
-                </a>
-                <div class="dock-item" title="Browser">
+                </label>
+                <label for="browser-toggle" class="dock-item" title="Browser">
                     <img src="images/icons/browser.svg" class="dock-icon" alt="Browser" width="42" height="42">
-                </div>
-                <div class="dock-item" title="Files">
+                </label>
+                <label for="files-toggle" class="dock-item" title="Files">
                     <img src="images/icons/files.svg" class="dock-icon" alt="Files" width="42" height="42">
-                </div>
-                <div class="dock-item" title="Settings">
+                </label>
+                <label for="settings-toggle" class="dock-item" title="Settings">
                     <img src="images/icons/settings.svg" class="dock-icon" alt="Settings" width="42" height="42">
-                </div>
+                </label>
             </div>
         </footer>
     </div>
 
     <script>
+        const CLOCK_OPTIONS = { 
+            year: 'numeric', 
+            month: '2-digit', 
+            day: '2-digit', 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        };
+        const clockEl = document.getElementById('clock');
+        const appMenu = document.querySelector('.app-menu');
+        const toggles = ['terminal', 'browser', 'files', 'settings'].map(id => document.getElementById(id + '-toggle'));
+
         function updateClock() {
             const now = new Date();
-            const options = { 
-                year: 'numeric', 
-                month: '2-digit', 
-                day: '2-digit', 
-                hour: '2-digit', 
-                minute: '2-digit' 
-            };
-            document.getElementById('clock').textContent = now.toLocaleString('ru-RU', options).replace(',', '');
+            clockEl.textContent = now.toLocaleString('ru-RU', CLOCK_OPTIONS).replace(',', '');
+            
+            const active = toggles.find(t => t.checked);
+            if (active && active.id) {
+                const appName = active.id.split('-')[0];
+                appMenu.textContent = appName.charAt(0).toUpperCase() + appName.slice(1);
+            }
         }
+        
         setInterval(updateClock, 1000);
         updateClock();
+
+        toggles.forEach(t => t.addEventListener('change', updateClock));
     </script>
 </body>
 </html>
