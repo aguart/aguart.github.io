@@ -1,0 +1,28 @@
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="globeGrad" x1="24" y1="4" x2="24" y2="44" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#3daee9"/>
+            <stop offset="1" stop-color="#1d669b"/>
+        </linearGradient>
+        <radialGradient id="gloss" cx="18" cy="18" r="20" fx="18" fy="18" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.4"/>
+            <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+    <!-- Background Circle (Ocean) -->
+    <circle cx="24" cy="24" r="20" fill="url(#globeGrad)"/>
+    
+    <!-- Grid Lines (Latitudes) -->
+    <path d="M4 24h40M7.5 14h33M7.5 34h33" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+    
+    <!-- Grid Lines (Longitudes) -->
+    <ellipse cx="24" cy="24" rx="8" ry="20" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+    <ellipse cx="24" cy="24" rx="16" ry="20" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+    <path d="M24 4v40" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+    <!-- Compass/Browser Ring -->
+    <path d="M24 4c11.046 0 20 8.954 20 20s-8.954 20-20 20S4 35.046 4 24 12.954 4 24 4z" fill="none" stroke="#2c3e50" stroke-width="1.5" stroke-opacity="0.2"/>
+    
+    <!-- Glossy Overlay -->
+    <circle cx="24" cy="24" r="20" fill="url(#gloss)"/>
+</svg>

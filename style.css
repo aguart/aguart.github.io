@@ -1,227 +1,353 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap');
 
 :root {
-    --background: #2A2220;
-    --monitor-bg: #121212;
-    --syn: #AA455F;
-    --name: #f9e45b;
-    --value: #189ab4;
-    --prompt: #639E78;
-    --link: #E56739;
+    --desktop-bg-start: #3a7bd5;
+    --desktop-bg-end: #001f3f;
+    --panel-bg: rgba(45, 45, 45, 0.95);
+    --terminal-bg: #121212;
+    --terminal-header: #3a3a3a;
+    --text-color: #ffffff;
+    --prompt-bg: #639E78;
+    --link-color: #E56739;
     --link-hover-bg: #e24486;
-    --text: #FFFFFF;
-    --monitor-border: #333333;
-    --monitor-bezel: #1a1a1a;
+    --name-color: #f9e45b;
+    --value-color: #189ab4;
 }
 
-a {
-    color: var(--link);
-    text-decoration: none;
+/* Background Logic */
+body:has(#start-blue:checked) { --desktop-bg-start: #3a7bd5; }
+body:has(#start-purple:checked) { --desktop-bg-start: #8e44ad; }
+body:has(#start-green:checked) { --desktop-bg-start: #27ae60; }
+body:has(#start-red:checked) { --desktop-bg-start: #e74c3c; }
+body:has(#start-dark:checked) { --desktop-bg-start: #2c3e50; }
+body:has(#start-teal:checked) { --desktop-bg-start: #1abc9c; }
+body:has(#start-pink:checked) { --desktop-bg-start: #ff758c; }
+body:has(#start-gold:checked) { --desktop-bg-start: #f1c40f; }
+
+body:has(#end-darkblue:checked) { --desktop-bg-end: #001f3f; }
+body:has(#end-deep-purple:checked) { --desktop-bg-end: #2c003e; }
+body:has(#end-dark-green:checked) { --desktop-bg-end: #0a2e1a; }
+body:has(#end-black:checked) { --desktop-bg-end: #000000; }
+body:has(#end-orange:checked) { --desktop-bg-end: #d35400; }
+body:has(#end-cyan:checked) { --desktop-bg-end: #2c3e50; }
+body:has(#end-rose:checked) { --desktop-bg-end: #ff7eb3; }
+body:has(#end-brown:checked) { --desktop-bg-end: #3e2723; }
+
+/* Swatch Selection Indicator */
+body:has(#start-blue:checked) label[for="start-blue"],
+body:has(#start-purple:checked) label[for="start-purple"],
+body:has(#start-green:checked) label[for="start-green"],
+body:has(#start-red:checked) label[for="start-red"],
+body:has(#start-dark:checked) label[for="start-dark"],
+body:has(#start-teal:checked) label[for="start-teal"],
+body:has(#start-pink:checked) label[for="start-pink"],
+body:has(#start-gold:checked) label[for="start-gold"],
+body:has(#end-darkblue:checked) label[for="end-darkblue"],
+body:has(#end-deep-purple:checked) label[for="end-deep-purple"],
+body:has(#end-dark-green:checked) label[for="end-dark-green"],
+body:has(#end-black:checked) label[for="end-black"],
+body:has(#end-orange:checked) label[for="end-orange"],
+body:has(#end-cyan:checked) label[for="end-cyan"],
+body:has(#end-rose:checked) label[for="end-rose"],
+body:has(#end-brown:checked) label[for="end-brown"] {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
-a:hover {
-    color: var(--text);
-    background: var(--link-hover-bg);
-}
-
-a h1 {
-    display: inline;
-    font-size: 1em;
-    margin: 0;
-    color: inherit; /* Чтобы заголовок наследовал цвет ссылки */
-}
-
-::-moz-selection { 
-    color: white;
-    background: var(--value);
-}
-  
-::selection {
-    color: white;
-    background: var(--value);
-}
-
-html,body {
-    font-family: 'Fira Code', monospace;
-    background-color: var(--background);
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    background-position: center center;
-    background-attachment: fixed;
-    color: white;
-    font-size: 1.0em;
-    font-weight: 400;
-    font-smooth: always;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.monitor-frame {
-    max-width: 1200px;
-    margin: 40px auto;
-    background: var(--monitor-bezel);
-    padding: 20px;
-    border-radius: 20px;
-    border: 4px solid var(--monitor-border);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    position: relative;
-}
-
-.monitor-screen-wrapper {
-    position: relative;
-    overflow: hidden;
-    border-radius: 5px;
-    border: 2px solid #000;
-}
-
-.monitor-screen {
-    background: var(--monitor-bg);
-    max-height: 80vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-/* Блик на экране монитора */
-.monitor-screen-wrapper::after {
-    content: "";
+/* Modal Styling */
+.settings-modal {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.1) 0%, transparent 75%);
-    pointer-events: none;
-    z-index: 10;
-}
-
-/* Кастомный скроллбар для монитора */
-.monitor-screen::-webkit-scrollbar {
-    width: 8px;
-}
-
-.monitor-screen::-webkit-scrollbar-track {
-    background: var(--monitor-bg);
-}
-
-.monitor-screen::-webkit-scrollbar-thumb {
-    background: var(--monitor-border);
-    border-radius: 4px;
-}
-
-.monitor-screen::-webkit-scrollbar-thumb:hover {
-    background: var(--prompt);
-}
-
-.monitor-stand {
-    width: 150px;
-    height: 15px;
-    background: var(--monitor-border);
-    margin: 0 auto;
-    position: relative;
-}
-
-.monitor-stand::after {
-    content: "";
-    display: block;
+    top: 25px;
+    right: 20px;
     width: 250px;
-    height: 8px;
-    background: var(--monitor-border);
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 5px 5px 0 0;
+    background: var(--panel-bg);
+    border: 1px solid #555;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 200;
+    display: none;
+    flex-direction: column;
+    color: white;
+    font-size: 0.9em;
 }
 
-.container {
-    margin: 0 auto;
+body:has(#bg-settings-toggle:checked) .settings-modal {
+    display: flex;
+}
+
+.settings-header {
+    background: var(--terminal-header);
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    font-weight: bold;
+}
+
+.close-settings {
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.settings-body {
+    padding: 15px;
+}
+
+.settings-body p {
+    margin-bottom: 8px;
+}
+
+.color-grid {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: transform 0.1s;
+}
+
+.swatch:hover {
+    transform: scale(1.1);
+}
+
+.theme-btn { cursor: pointer; filter: grayscale(1); transition: filter 0.2s; font-size: 1.2em; }
+.theme-btn:hover { filter: grayscale(0); }
+
+* {
     box-sizing: border-box;
-    padding: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Fira Code', monospace;
+    background: linear-gradient(135deg, var(--desktop-bg-start) 0%, var(--desktop-bg-end) 100%);
+    background-attachment: fixed;
+    color: var(--text-color);
+}
+
+.desktop {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Fixed height to match viewport */
+    overflow: hidden; /* Prevent body scroll */
+}
+
+/* Top Bar */
+.top-bar {
+    height: 30px;
+    background: var(--panel-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    font-size: 0.85em;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    z-index: 100;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.app-menu {
+    font-weight: bold;
+    cursor: default;
+}
+
+
+.clock {
+    margin: 0 10px;
+}
+
+/* Workspace */
+.workspace {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px 10px 20px;
+    min-height: 0; /* Important for flex child to allow shrinking/scrolling */
+    overflow: hidden;
+}
+
+/* Terminal Window */
+.terminal-window {
+    width: 80%;
+    max-width: 1200px;
+    height: 92%;
+    background: var(--terminal-bg);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #444;
+}
+
+.terminal-header {
+    background: var(--terminal-header);
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    cursor: default;
+    user-select: none;
+}
+
+.terminal-title {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #555;
+}
+
+.control.close { background: #ff5f56; }
+.control.minimize { background: #ffbd2e; }
+.control.maximize { background: #27c93f; }
+
+.terminal-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    font-size: 1em;
+    line-height: 1.4;
+    min-height: 0; /* Ensure it can shrink and scroll */
+}
+
+/* Terminal Content Styles */
+.container {
+    max-width: 100%;
 }
 
 .prompt {
     color: white;
-    background: var(--prompt);
-    padding: 0px 10px;
-    margin-right: 10px;
+    background: var(--prompt-bg);
+    padding: 0 8px;
+    margin-right: 8px;
 }
 
 .prompt-text {
-    color: var(--prompt);
+    color: var(--prompt-bg);
 }
 
-.name {
-    color: var(--name);
-}
-
-.value {
-    color: var(--value);
-}
-
-ul {
-    list-style-type: none;
-}
-
-li {
-    margin: 0px 0;
-}
+.name { color: var(--name-color); }
+.value { color: var(--value-color); }
 
 pre {
     margin: 1em 0;
     white-space: pre-wrap;
     word-break: break-all;
-    font-size: 1.2em;
 }
 
-code {
-    font-family: inherit;
-    font-size: inherit;
+ul { list-style: none; margin-left: 20px; }
+a { color: var(--link-color); text-decoration: none; }
+a:hover { background: var(--link-hover-bg); color: #fff; }
+.dock-item:hover { background: transparent !important; }
+a h1 { display: inline; font-size: 1.2em; }
+
+/* Dock */
+.dock-container {
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    pointer-events: none;
 }
 
-@media screen and (max-width: 1500px) {
-    body {
-        font-size: 1em;
-    }
-
-    .monitor-frame {
-        margin: 20px;
-    }
-
-    .container {
-        padding: 25px 50px;
-    }
+.dock {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 8px 15px;
+    border-radius: 12px;
+    display: flex;
+    gap: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    pointer-events: auto;
 }
 
+.dock-item {
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dock-item:hover {
+    transform: scale(1.15) translateY(-5px);
+}
+
+.dock-icon {
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.terminal-content::-webkit-scrollbar {
+    width: 8px;
+}
+.terminal-content::-webkit-scrollbar-track {
+    background: var(--terminal-bg);
+}
+.terminal-content::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+.terminal-content::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+/* Responsive */
 @media screen and (max-width: 600px) {
-    .monitor-frame {
-        margin: 0;
-        padding: 10px;
-        border-radius: 0;
-        border: none;
-    }
-
-    .monitor-screen {
-        max-height: none;
+    .desktop {
+        height: auto;
+        min-height: 100vh;
         overflow: visible;
     }
-
-    .monitor-stand {
+    .terminal-window {
+        width: 100%;
+        height: calc(100vh - 30px);
+        border-radius: 0;
+        border: none;
+        flex-shrink: 0; /* Prevent shrinking below calculated height */
+    }
+    .workspace {
+        padding: 0;
+    }
+    .dock-container {
         display: none;
     }
-
-    .container {
-        padding: 20px 15px;
-        width: 100%;
-    }
-    
-    .prompt {
-        padding: 0px 5px;
-        margin-right: 5px;
-    }
-
-    body {
-        font-size: 0.9em;
+    .top-bar {
+        font-size: 0.75em;
     }
 }
