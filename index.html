@@ -12,7 +12,16 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://aguart.github.io/">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Alexey Gridnev | Backend Software Engineer">
+    <meta property="og:description" content="Backend Software Engineer specializing in Golang, Network Engineering, and Cybersecurity.">
+    <meta property="og:url" content="https://aguart.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://aguart.github.io/images/animal-2.png">
+
     <link rel="shortcut icon" href="/images/animal-2.png"/>
 </head>
 
@@ -51,7 +60,16 @@
     <div class="desktop">
         <header class="top-bar">
             <div class="left-section">
-                <span class="app-menu">Terminal</span>
+                <div class="app-menu-container">
+                    <span class="app-menu">Terminal</span>
+                    <div class="app-dropdown">
+                        <label for="terminal-toggle" class="dropdown-item">Terminal</label>
+                        <label for="browser-toggle" class="dropdown-item">Browser</label>
+                        <label for="files-toggle" class="dropdown-item">Files</label>
+                        <label for="settings-toggle" class="dropdown-item">Settings</label>
+                    </div>
+                </div>
+                <div class="menu-arrow"><i class="fas fa-chevron-down"></i></div>
             </div>
             <div class="right-section">
                 <span id="clock" class="clock"></span>
@@ -411,6 +429,8 @@
         };
         const clockEl = document.getElementById('clock');
         const appMenu = document.querySelector('.app-menu');
+        const appDropdown = document.querySelector('.app-dropdown');
+        const menuArrow = document.querySelector('.menu-arrow');
         const toggles = ['terminal', 'browser', 'files', 'settings'].map(id => document.getElementById(id + '-toggle'));
 
         function updateClock() {
@@ -427,7 +447,23 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        toggles.forEach(t => t.addEventListener('change', updateClock));
+        toggles.forEach(t => t.addEventListener('change', () => {
+            updateClock();
+            appDropdown.classList.remove('active');
+        }));
+
+        // Toggle dropdown on click for mobile
+        const handleMenuToggle = (e) => {
+            e.stopPropagation();
+            appDropdown.classList.toggle('active');
+        };
+
+        appMenu.addEventListener('click', handleMenuToggle);
+        menuArrow.addEventListener('click', handleMenuToggle);
+
+        document.addEventListener('click', () => {
+            appDropdown.classList.remove('active');
+        });
     </script>
 </body>
 </html>
