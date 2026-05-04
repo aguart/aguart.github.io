@@ -1,0 +1,422 @@
+@keyframes retro-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.45; }
+}
+
+@keyframes retro-rainbow {
+    0% { border-color: #ff00ff; }
+    25% { border-color: #00ffff; }
+    50% { border-color: #ffff00; }
+    75% { border-color: #00ff00; }
+    100% { border-color: #ff00ff; }
+}
+
+.retro-side-banners {
+    display: none;
+}
+
+html[data-theme="retro"] body {
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.08) 0 8px,
+            rgba(0, 0, 0, 0.08) 8px 16px
+        ),
+        radial-gradient(circle at 12px 12px, rgba(255,255,255,0.26) 0 2px, transparent 2px) 0 0 / 24px 24px,
+        linear-gradient(180deg, var(--desktop-bg-start) 0%, var(--desktop-bg-end) 100%);
+    color: #000;
+    font-family: var(--retro-font), serif;
+}
+
+html[data-theme="retro"] body,
+html[data-theme="retro"] .desktop,
+html[data-theme="retro"] .top-bar,
+html[data-theme="retro"] .settings-window,
+html[data-theme="retro"] .files-window,
+html[data-theme="retro"] .browser-window,
+html[data-theme="retro"] .app-dropdown,
+html[data-theme="retro"] .browser-content,
+html[data-theme="retro"] .files-main,
+html[data-theme="retro"] .settings-main {
+    font-family: var(--retro-font), serif;
+}
+
+html[data-theme="retro"] .retro-mode-slider {
+    border-radius: 0;
+    border: 2px solid;
+    border-color: #fff #505050 #505050 #fff;
+    background: #c0c0c0;
+}
+
+html[data-theme="retro"] .retro-mode-slider::before {
+    border-radius: 0;
+    border: 1px solid #000;
+    box-shadow: none;
+}
+
+html[data-theme="retro"] .retro-mode-switch input:checked + .retro-mode-slider {
+    background: #000080;
+}
+
+html[data-theme="retro"] .retro-mode-state {
+    border-radius: 0;
+    border: 1px solid;
+    border-color: #fff #505050 #505050 #fff;
+    background: #c0c0c0;
+    color: #000;
+}
+
+html[data-theme="retro"] .retro-mode-state[data-state="on"] {
+    background: #000080;
+    color: #fff;
+}
+
+html[data-theme="retro"] .workspace::before {
+    content: "BEST VIEWED IN NETSCAPE NAVIGATOR";
+    position: absolute;
+    top: 18px;
+    right: 32px;
+    z-index: 300;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #c00000;
+    background: #ffff00;
+    border: 3px dashed #ff00ff;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+    transform: rotate(4deg);
+    animation: retro-blink 1s steps(2, end) infinite;
+    pointer-events: none;
+}
+
+html[data-theme="retro"] .workspace::after {
+    content: "UNDER CONSTRUCTION";
+    position: absolute;
+    left: 30px;
+    bottom: 22px;
+    z-index: 300;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: #000080;
+    background: #ffcc00;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+    letter-spacing: 0.08em;
+    pointer-events: none;
+}
+
+html[data-theme="retro"] .workspace {
+    padding-left: 160px;
+    padding-right: 160px;
+}
+
+html[data-theme="retro"] .retro-side-banners {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    right: 20px;
+    bottom: 16px;
+    z-index: 300;
+}
+
+html[data-theme="retro"] .retro-side-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+html[data-theme="retro"] .retro-side-column.right {
+    align-items: flex-end;
+}
+
+html[data-theme="retro"] .retro-side-banner {
+    width: 126px;
+    height: fit-content;
+    border: 3px solid #ff00ff;
+    background: #000;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 0.74rem;
+    line-height: 1.25;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 8px 6px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+    animation: retro-rainbow 2.8s steps(1, end) infinite;
+}
+
+html[data-theme="retro"] .retro-side-column.left .retro-side-banner:nth-child(odd) {
+    transform: rotate(-2deg);
+}
+
+html[data-theme="retro"] .retro-side-column.left .retro-side-banner:nth-child(even) {
+    transform: rotate(1.5deg);
+}
+
+html[data-theme="retro"] .retro-side-column.right .retro-side-banner:nth-child(odd) {
+    transform: rotate(2deg);
+}
+
+html[data-theme="retro"] .retro-side-column.right .retro-side-banner:nth-child(even) {
+    transform: rotate(-1.5deg);
+}
+
+html[data-theme="retro"] .retro-side-banner:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+html[data-theme="retro"] .retro-side-banner:nth-child(3) {
+    animation-delay: 1.2s;
+}
+
+html[data-theme="retro"] .retro-side-banner strong {
+    display: block;
+    background: #ffff00;
+    color: #000;
+    margin-bottom: 8px;
+    padding: 3px 2px;
+    border: 1px solid #000;
+}
+
+html[data-theme="retro"] .retro-side-banner span {
+    display: block;
+    margin-bottom: 6px;
+}
+
+html[data-theme="retro"] .retro-app-icon {
+    display: block;
+    width: auto;
+    max-width: 90px;
+    height: 24px;
+    margin: 2px auto 8px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,0.3));
+}
+
+/* Jabber logo has dark wordmark, so it needs a light chip behind it. */
+html[data-theme="retro"] img[src$="Jabber_logo.png"].retro-app-icon {
+    background: #fefefe;
+    border: 1px solid #6b6b6b;
+    border-radius: 3px;
+    padding: 1px 4px;
+    height: 26px;
+}
+
+html[data-theme="retro"] .retro-side-banner span:last-child {
+    margin-bottom: 0;
+}
+
+html[data-theme="retro"] .top-bar {
+    height: 40px;
+    background: #c0c0c0;
+    color: #000;
+    border-bottom: 2px solid #000;
+    box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #808080;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+html[data-theme="retro"] .menu-arrow,
+html[data-theme="retro"] .user-name,
+html[data-theme="retro"] .clock,
+html[data-theme="retro"] .app-menu {
+    color: #000;
+}
+
+html[data-theme="retro"] .app-menu:hover {
+    background: #000080;
+    color: #fff;
+}
+
+html[data-theme="retro"] .app-dropdown {
+    background: #fffff0;
+    backdrop-filter: none;
+    border: 2px solid;
+    border-color: #fff #404040 #404040 #fff;
+    border-radius: 0;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.28);
+}
+
+html[data-theme="retro"] .dropdown-item {
+    color: #000;
+}
+
+html[data-theme="retro"] .dropdown-item:hover {
+    background: #000080;
+    color: #fff;
+}
+
+html[data-theme="retro"] .terminal-window,
+html[data-theme="retro"] .browser-window,
+html[data-theme="retro"] .files-window,
+html[data-theme="retro"] .settings-window {
+    border-radius: 0;
+    border: 2px solid;
+    border-color: #fff #303030 #303030 #fff;
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.35);
+}
+
+html[data-theme="retro"] .files-window,
+html[data-theme="retro"] .settings-window {
+    background: #c0c0c0;
+}
+
+html[data-theme="retro"] .terminal-header,
+html[data-theme="retro"] .browser-header,
+html[data-theme="retro"] .files-header,
+html[data-theme="retro"] .settings-header {
+    background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+    color: #fff;
+    border-bottom: 2px solid #000;
+}
+
+html[data-theme="retro"] .terminal-title,
+html[data-theme="retro"] .files-title,
+html[data-theme="retro"] .settings-title,
+html[data-theme="retro"] .address-input {
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+html[data-theme="retro"] .files-sidebar,
+html[data-theme="retro"] .settings-sidebar {
+    background: #d4d0c8;
+    border-right: 2px solid #808080;
+}
+
+html[data-theme="retro"] .sidebar-item:hover,
+html[data-theme="retro"] .sidebar-item.active,
+html[data-theme="retro"] body:has(#section-appearance:checked) #sidebar-appearance,
+html[data-theme="retro"] body:has(#section-profile:checked) #sidebar-profile,
+html[data-theme="retro"] body:has(#section-system:checked) #sidebar-system {
+    background: #000080;
+    color: #fff;
+}
+
+html[data-theme="retro"] .files-main,
+html[data-theme="retro"] .settings-main,
+html[data-theme="retro"] .browser-content {
+    background: #fffef2;
+    color: #000;
+}
+
+html[data-theme="retro"] .file-item:hover,
+html[data-theme="retro"] .resource-item:hover {
+    background: #ffff99;
+}
+
+html[data-theme="retro"] .browser-address-bar {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #404040 #404040 #fff;
+    border-radius: 0;
+}
+
+html[data-theme="retro"] .resource-item {
+    background: #ffffff;
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
+    border-radius: 0;
+    color: #0000ee !important;
+    text-decoration: underline;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.16);
+}
+
+html[data-theme="retro"] .control {
+    width: 14px;
+    height: 14px;
+    border-radius: 0;
+    border: 1px solid;
+    border-color: #fff #404040 #404040 #fff;
+}
+
+html[data-theme="retro"] .terminal-content {
+    background: #000;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 3px rgba(0,255,0,0.45);
+    border-top: 2px solid #c0c0c0;
+}
+
+html[data-theme="retro"] .prompt {
+    background: #ffff00;
+    color: #000;
+    font-weight: bold;
+}
+
+html[data-theme="retro"] .prompt-text {
+    color: #00ffff;
+}
+
+html[data-theme="retro"] .name { color: #ff66ff; }
+html[data-theme="retro"] .value { color: #00ffff; }
+
+html[data-theme="retro"] a {
+    color: #0000ee;
+    text-decoration: underline;
+}
+
+html[data-theme="retro"] a:hover {
+    color: #ff0000;
+    background: #ffff00;
+}
+
+html[data-theme="retro"] .dock {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #404040 #404040 #fff;
+    border-radius: 0;
+    backdrop-filter: none;
+    box-shadow: 0 -2px 0 rgba(0,0,0,0.2);
+    gap: 8px;
+}
+
+html[data-theme="retro"] .dock-item {
+    padding: 3px;
+}
+
+html[data-theme="retro"] .dock-item:hover {
+    transform: none;
+    background: #dcdcdc !important;
+    box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #808080;
+}
+
+html[data-theme="retro"] .dock-icon {
+    filter: none;
+}
+
+@media screen and (max-width: 900px) {
+    html[data-theme="retro"] .workspace {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    html[data-theme="retro"] .retro-side-banners {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    html[data-theme="retro"] .workspace::before,
+    html[data-theme="retro"] .workspace::after,
+    html[data-theme="retro"] .retro-side-banners {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+

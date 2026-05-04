@@ -12,6 +12,8 @@
     --link-hover-bg: #e24486;
     --name-color: #f9e45b;
     --value-color: #189ab4;
+    --ui-font: 'Fira Code', monospace;
+    --retro-font: 'Times New Roman', Times, serif;
 }
 
 /* Background Logic */
@@ -227,6 +229,99 @@ body:has(#settings-toggle:checked) .settings-window {
 .theme-btn { cursor: pointer; filter: grayscale(1); transition: filter 0.2s; font-size: 1.2em; }
 .theme-btn:hover { filter: grayscale(0); }
 
+.retro-mode-row {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.retro-mode-row h4 {
+    margin-bottom: 4px;
+}
+
+.retro-mode-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.retro-mode-state {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: #d5d5d5;
+    color: #5a5a5a;
+}
+
+.retro-mode-state[data-state="on"] {
+    background: #2f5ee5;
+    color: #fff;
+}
+
+.retro-mode-row p {
+    margin-bottom: 0;
+}
+
+.retro-mode-switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+.retro-mode-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.retro-mode-slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: #c7c7c7;
+    border-radius: 999px;
+    transition: background 0.2s;
+    border: 1px solid #b2b2b2;
+}
+
+.retro-mode-slider::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    transition: transform 0.2s;
+}
+
+.retro-mode-switch input:checked + .retro-mode-slider {
+    background: #4f7cff;
+}
+
+.retro-mode-switch input:checked + .retro-mode-slider::before {
+    transform: translateX(24px);
+}
+
+.retro-mode-switch input:focus-visible + .retro-mode-slider {
+    outline: 2px solid #2f5ee5;
+    outline-offset: 2px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -235,7 +330,7 @@ body:has(#settings-toggle:checked) .settings-window {
 
 html, body {
     height: 100%;
-    font-family: 'Fira Code', monospace;
+    font-family: var(--ui-font), monospace;
     background: linear-gradient(135deg, var(--desktop-bg-start) 0%, var(--desktop-bg-end) 100%);
     background-attachment: fixed;
     background-color: var(--desktop-bg-end); /* Fallback */

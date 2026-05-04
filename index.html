@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./retro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <!-- Canonical URL -->
@@ -23,6 +24,17 @@
     <meta property="og:image" content="https://aguart.github.io/images/animal-2.png">
 
     <link rel="shortcut icon" href="/images/animal-2.png"/>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('aguart-theme-mode') === 'retro') {
+                    document.documentElement.dataset.theme = 'retro';
+                }
+            } catch (error) {
+                console.debug('Theme preference is unavailable.', error);
+            }
+        }());
+    </script>
 </head>
 
 <body>
@@ -78,6 +90,71 @@
         </header>
 
         <main class="workspace">
+            <div class="retro-side-banners" aria-hidden="true">
+                <div class="retro-side-column left">
+                    <div class="retro-side-banner">
+                        <strong>HOMM III LAB</strong>
+                        <img class="retro-app-icon" src="images/Homm3-logo.png" alt="Heroes of Might and Magic III logo" loading="lazy">
+                        <span>Castle rush detected.</span>
+                        <span>One more turn, again.</span>
+                    </div>
+                    <div class="retro-side-banner">
+                        <strong>MIRC HUB</strong>
+                        <img class="retro-app-icon" src="images/Mirc_logo.png" alt="mIRC logo" loading="lazy">
+                        <span>/join #retro-chat</span>
+                        <span>Netsplit survived.</span>
+                    </div>
+                    <div class="retro-side-banner">
+                        <strong>DIAL-UP ARENA</strong>
+                        <span>Ping 380 ms.</span>
+                        <span>Please do not pick up phone.</span>
+                        <span>Still totally playable.</span>
+                    </div>
+                    <div class="retro-side-banner">
+                        <strong>CD-RW CLUB</strong>
+                        <span>Finalizing disc...</span>
+                        <span>Buffer underrun survivor.</span>
+                    </div>
+                    <div class="retro-side-banner">
+                        <strong>CHEAT CODES</strong>
+                        <span>iddqd unavailable.</span>
+                        <span>Try skill and luck.</span>
+                    </div>
+                </div>
+                <div class="retro-side-column right">
+                    <div class="retro-side-banner">
+                        <strong>WINAMP ZONE</strong>
+                        <img class="retro-app-icon" src="images/Winamp-logo.png" alt="Winamp logo" loading="lazy">
+                        <span>It really whips.</span>
+                        <span>Neon skin included.</span>
+                    </div>
+                    <div class="retro-side-banner">
+                        <strong>LAN PARTY 2001</strong>
+                        <span>Bring your CRT.</span>
+                        <span>And 20m extension cord.</span>
+                    </div>
+                    <div class="retro-side-banner">
+                        <strong>LOCAL NET OPS</strong>
+                        <span>IP: 10.6.1.13</span>
+                        <span>DNS: 213.24.19.2</span>
+                        <span>Mask: 255.255.255.0 (/24)</span>
+                        <span>Pro mode: 255.255.0.0 (/16)</span>
+                        <span>Gateway: ask admin (he is afk)</span>
+                    </div>
+                    <div class="retro-side-banner">
+                        <strong>JABBER STATUS</strong>
+                        <img class="retro-app-icon" src="images/Jabber_logo.png" alt="Jabber logo" loading="lazy">
+                        <span>XML online.</span>
+                        <span>Presence: xa.</span>
+                    </div>
+                    <div class="retro-side-banner">
+                        <strong>ICQ ALERT</strong>
+                        <img class="retro-app-icon" src="images/Logo_ICQ.png" alt="ICQ logo" loading="lazy">
+                        <span>Uh-oh message arrived.</span>
+                        <span>Status: away since 2004.</span>
+                    </div>
+                </div>
+            </div>
             <!-- Settings Window -->
             <div class="settings-window" id="settings-window">
                 <div class="settings-header">
@@ -123,6 +200,19 @@
                             <label for="end-cyan" class="swatch" style="background: #2c3e50;" title="Cyan"></label>
                             <label for="end-rose" class="swatch" style="background: #ff7eb3;" title="Rose"></label>
                             <label for="end-brown" class="swatch" style="background: #3e2723;" title="Brown"></label>
+                        </div>
+                        <div class="retro-mode-row">
+                            <div>
+                                <div class="retro-mode-title">
+                                    <h4>Retro mode</h4>
+                                    <span id="retro-mode-state" class="retro-mode-state" data-state="off" aria-live="polite">OFF</span>
+                                </div>
+                                <p>Enable a full 90s website style easter egg.</p>
+                            </div>
+                            <label class="retro-mode-switch" for="retro-mode-toggle" aria-label="Toggle retro mode">
+                                <input type="checkbox" id="retro-mode-toggle">
+                                <span class="retro-mode-slider"></span>
+                            </label>
                         </div>
                         </div>
                     </section>
@@ -420,7 +510,8 @@
     </div>
 
     <script>
-        const CLOCK_OPTIONS = { 
+        const THEME_STORAGE_KEY = 'aguart-theme-mode';
+        const CLOCK_OPTIONS = {
             year: 'numeric', 
             month: '2-digit', 
             day: '2-digit', 
@@ -431,7 +522,33 @@
         const appMenu = document.querySelector('.app-menu');
         const appDropdown = document.querySelector('.app-dropdown');
         const menuArrow = document.querySelector('.menu-arrow');
+        const retroModeToggle = document.getElementById('retro-mode-toggle');
+        const retroModeState = document.getElementById('retro-mode-state');
         const toggles = ['terminal', 'browser', 'files', 'settings'].map(id => document.getElementById(id + '-toggle'));
+
+        function persistThemeMode(mode) {
+            try {
+                localStorage.setItem(THEME_STORAGE_KEY, mode);
+            } catch (error) {
+                console.debug('Theme preference could not be saved.', error);
+            }
+        }
+
+        function setRetroMode(enabled) {
+            if (enabled) {
+                document.documentElement.dataset.theme = 'retro';
+                persistThemeMode('retro');
+            } else {
+                delete document.documentElement.dataset.theme;
+                persistThemeMode('default');
+            }
+
+            retroModeToggle.checked = enabled;
+            if (retroModeState) {
+                retroModeState.textContent = enabled ? 'ON' : 'OFF';
+                retroModeState.dataset.state = enabled ? 'on' : 'off';
+            }
+        }
 
         function updateClock() {
             const now = new Date();
@@ -446,11 +563,16 @@
         
         setInterval(updateClock, 1000);
         updateClock();
+        setRetroMode(document.documentElement.dataset.theme === 'retro');
 
         toggles.forEach(t => t.addEventListener('change', () => {
             updateClock();
             appDropdown.classList.remove('active');
         }));
+
+        retroModeToggle.addEventListener('change', () => {
+            setRetroMode(retroModeToggle.checked);
+        });
 
         // Toggle dropdown on click for mobile
         const handleMenuToggle = (e) => {
